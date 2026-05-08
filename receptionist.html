@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receptionist Panel - HMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased text-slate-700">
+    <div id="receptionist-panel" class="view-section">
+        <div class="flex h-screen bg-gray-50">
+             <aside class="w-64 flex-shrink-0 bg-gray-800 text-white flex flex-col">
+                <div class="h-16 flex items-center justify-center text-2xl font-bold">Receptionist Panel</div>
+                <nav class="flex-1 px-4 py-4 space-y-2">
+                    <a href="#dashboard" class="panel-link receptionist-link flex items-center px-4 py-2 rounded-md bg-gray-700">Dashboard</a>
+                    <a href="#manage-patients" class="panel-link receptionist-link flex items-center px-4 py-2 rounded-md hover:bg-gray-700">Manage Patients</a>
+                    <a href="#schedule-appointments" class="panel-link receptionist-link flex items-center px-4 py-2 rounded-md hover:bg-gray-700">Schedule Appointments</a>
+                </nav>
+                <div class="p-4"><button class="logout-btn w-full text-left flex items-center px-4 py-2 rounded-md hover:bg-red-600">Logout</button></div>
+            </aside>
+            <main class="flex-1 p-6 overflow-y-auto main-content">
+                <section id="receptionist-dashboard" class="panel-section">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-6">Dashboard</h1>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                       <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4"><div class="text-3xl">🧑‍🤝‍🧑</div><div><p class="text-gray-500">New Patients Registered Today</p><p id="rec-new-patients-today" class="text-2xl font-bold">0</p></div></div>
+                       <div class="bg-white p-6 rounded-xl shadow-md flex items-center space-x-4"><div class="text-3xl">📅</div><div><p class="text-gray-500">Appointments Scheduled Today</p><p id="rec-appointments-today" class="text-2xl font-bold">0</p></div></div>
+                    </div>
+                </section>
+                <section id="receptionist-manage-patients" class="hidden panel-section"></section>
+                <section id="receptionist-schedule-appointments" class="hidden panel-section"></section>
+            </main>
+        </div>
+    </div>
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/receptionist.js"></script>
+</body>
+</html>
