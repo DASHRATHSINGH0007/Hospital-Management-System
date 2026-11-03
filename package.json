@@ -1,0 +1,31 @@
+{
+  "name": "medicore-hospital-system",
+  "version": "1.0.0",
+  "description": "MediCore - Smart Healthcare Management Platform",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run --prefix backend dev",
+    "dev:frontend": "npm run --prefix frontend dev",
+    "dev:ai": "cd ai-engine && python app.py",
+    "build:backend": "npm run --prefix backend build",
+    "build:frontend": "npm run --prefix frontend build",
+    "db:migrate": "npm run --prefix backend prisma:migrate",
+    "db:seed": "npm run --prefix backend prisma:seed",
+    "test": "npm run --prefix backend test"
+  },
+  "keywords": [
+    "hospital-management",
+    "healthcare",
+    "nextjs",
+    "express",
+    "prisma",
+    "scikit-learn",
+    "ai"
+  ],
+  "author": "MediCore Engineering Team",
+  "license": "MIT"
+}
