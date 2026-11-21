@@ -324,8 +324,9 @@ export default function AdminDashboardPage() {
       <Dialog
         isOpen={showQuickPatientModal}
         onClose={() => setShowQuickPatientModal(false)}
-        title="Emergency / Quick Patient Intake"
-        description="Register a new patient profile directly into the MediCore clinical database."
+        title="Patient Intake & Care Need Registration"
+        description="Register a new patient profile and route immediately according to clinical care needs."
+        maxWidth="lg"
       >
         <form onSubmit={handlePatientSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
@@ -357,6 +358,52 @@ export default function AdminDashboardPage() {
               </select>
             </div>
           </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Primary Care Need</label>
+              <select className="w-full h-10 px-3 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="OPD Consultation">🩺 OPD Consultation</option>
+                <option value="Emergency Care">🚨 Emergency Care</option>
+                <option value="Inpatient Admission">🛏️ Inpatient Admission</option>
+                <option value="Diagnostic / Lab">🧪 Diagnostic / Lab</option>
+                <option value="Health Checkup">🛡️ Health Checkup</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Department</label>
+              <select className="w-full h-10 px-3 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="Cardiology">Cardiology</option>
+                <option value="Neurology">Neurology</option>
+                <option value="Pediatrics">Pediatrics</option>
+                <option value="Orthopedics">Orthopedics</option>
+                <option value="General Medicine" selected>General Medicine</option>
+                <option value="Emergency">Emergency</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Triage Priority Level</label>
+              <select className="w-full h-10 px-3 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="Routine" selected>Routine (Standard)</option>
+                <option value="Urgent">Urgent (Priority)</option>
+                <option value="Emergency">Emergency (Immediate)</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Bed Preference</label>
+              <select className="w-full h-10 px-3 text-sm bg-white border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600">
+                <option value="None" selected>None (Outpatient)</option>
+                <option value="General Ward">General Ward</option>
+                <option value="Semi-Private">Semi-Private Room</option>
+                <option value="Private Suite">Private AC Suite</option>
+                <option value="ICU">Intensive Care Unit (ICU)</option>
+              </select>
+            </div>
+          </div>
+
           <div>
             <label className="block text-xs font-bold uppercase text-slate-500 mb-1">Phone Number</label>
             <Input placeholder="+1 555-0199" required />
@@ -374,7 +421,7 @@ export default function AdminDashboardPage() {
               Cancel
             </Button>
             <Button type="submit" variant="default">
-              Register Patient
+              Register & Route Need
             </Button>
           </div>
         </form>

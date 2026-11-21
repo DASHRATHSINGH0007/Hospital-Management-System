@@ -11,6 +11,15 @@ export const createPatientSchema = z.object({
   emergencyContact: z.string().optional(),
   allergies: z.string().optional(),
   medicalHistory: z.string().optional(),
+  // Patient chosen healthcare needs & preferences
+  careNeed: z.string().optional(),
+  department: z.string().optional(),
+  preferredDoctor: z.string().optional(),
+  priority: z.enum(['Routine', 'Urgent', 'Emergency']).optional(),
+  bedPreference: z.string().optional(),
+  specialAssistance: z.array(z.string()).or(z.string()).optional(),
+  paymentMethod: z.string().optional(),
+  chiefComplaint: z.string().optional(),
 });
 
 export const updatePatientSchema = createPatientSchema.partial();

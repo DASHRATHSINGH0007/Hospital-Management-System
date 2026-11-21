@@ -12,16 +12,20 @@ export class PatientController {
       const search = (req.query.search as string)?.toLowerCase().trim();
       const bloodGroup = req.query.bloodGroup as string;
       const gender = req.query.gender as string;
+      const careNeed = (req.query.careNeed as string)?.toLowerCase().trim();
+      const priority = (req.query.priority as string)?.toLowerCase().trim();
 
       let list = [...store.patients];
 
       if (search) {
         list = list.filter(
           (p) =>
-            p.firstName.toLowerCase().includes(search) ||
-            p.lastName.toLowerCase().includes(search) ||
-            p.patientCode.toLowerCase().includes(search) ||
-            p.phone?.includes(search)
+            p.firstName?.toLowerCase().includes(search) ||
+            p.lastName?.toLowerCase().includes(search) ||
+            p.patientCode?.toLowerCase().includes(search) ||
+            p.phone?.includes(search) ||
+            p.careNeed?.toLowerCase().includes(search) ||
+            p.department?.toLowerCase().includes(search)
         );
       }
 
@@ -30,7 +34,15 @@ export class PatientController {
       }
 
       if (gender) {
-        list = list.filter((p) => p.gender.toLowerCase() === gender.toLowerCase());
+        list = list.filter((p) => p.gender?.toLowerCase() === gender.toLowerCase());
+      }
+
+      if (careNeed) {
+        list = list.filter((p) => p.careNeed?.toLowerCase() === careNeed);
+      }
+
+      if (priority) {
+        list = list.filter((p) => p.priority?.toLowerCase() === priority);
       }
 
       return res.status(200).json({
@@ -111,6 +123,14 @@ export class PatientController {
         emergencyContact: data.emergencyContact || 'None',
         allergies: data.allergies || 'None',
         medicalHistory: data.medicalHistory || 'None',
+        careNeed: data.careNeed || 'OPD Consultation',
+        department: data.department || 'General Medicine',
+        preferredDoctor: data.preferredDoctor || 'Any Available Doctor',
+        priority: data.priority || 'Routine',
+        bedPreference: data.bedPreference || 'None (Outpatient)',
+        specialAssistance: Array.isArray(data.specialAssistance) ? data.specialAssistance : (data.specialAssistance ? [data.specialAssistance] : []),
+        paymentMethod: data.paymentMethod || 'Self-Pay / Cash',
+        chiefComplaint: data.chiefComplaint || 'Consultation request',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
@@ -179,7 +199,7 @@ export class PatientController {
       }
 
       const removed = store.patients.splice(index, 1)[0];
-      store.logAudit(req.user?.userId || null, 'DELETE', 'Patient', id, { name: `${removed.firstName} ${removed.lastName}` });
+      store.logAudit(req.user?.userId || null, 'DELETE', 'Patient', id as string, { name: `${removed.firstName} ${removed.lastName}` });
 
       return res.status(200).json({
         success: true,

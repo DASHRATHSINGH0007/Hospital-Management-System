@@ -466,7 +466,9 @@ async function main() {
   console.log(`✅ ${data.doctors.length} doctors, ${data.patients.length} patients, ${data.medicines.length} medicines, ${data.beds.length} beds.`);
 }
 
-if (require.main === module) {
+// Execute main() only when executed directly: npx tsx prisma/seed.ts
+const isMain = process.argv[1] && (process.argv[1].endsWith('seed.ts') || process.argv[1].endsWith('seed.js'));
+if (isMain) {
   main().catch((e) => {
     console.error(e);
     process.exit(1);
